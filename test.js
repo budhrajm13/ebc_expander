@@ -223,3 +223,23 @@ class CommentAnalyzer {
         return result;
     }
 }
+
+
+
+
+function main() {
+// Example usage of the updated class with an array of comments
+const analyzer = new CommentAnalyzer();
+const commentsArray = [
+    "I didn't like.",
+    "Wrong item.",
+    "Not as per description.",
+    "Defective item.",
+    "fragile"
+];
+
+// Process the array of comments and show the results
+const processedResult = analyzer.processComments(commentsArray);
+
+console.log(processedResult);    
+}
