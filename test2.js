@@ -210,7 +210,7 @@ this.testableCategories = {
          //   result += `Testable Comments and Reasons:\n`;
          //   result += testableComments.join('\n');
 
-        result += `\nAll Testable Comments:\n\n`;
+        //result += `\nAll Testable Comments:\n\n`;
         result += allTestableComments;
 
         } else {
