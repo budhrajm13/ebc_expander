@@ -1,1 +1,1 @@
-console.log('external script running...')
+function test() {console.log('external script running...')}
