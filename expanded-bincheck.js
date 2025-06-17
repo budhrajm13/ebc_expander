@@ -1,1 +1,34 @@
-const _0x1a9d80=_0xbbe4;function _0x84c1(){const _0x442b90=['55373mpIyQA','getFullYear','72vdgDuP','xorEncrypt','4bfjobL','191163MYGdBE','log','now','222096xyYluf','8110CKGBqA','getDate','Processing\x20error\x20occurred','getTime','ValidationController','10804842LAOzCD','getMonth','getMinutes','2336796SWqTTx','floor','END_DATE','20911uxtnwn','KEY_OFFSET','20KaWBcm','346064gbKtML'];_0x84c1=function(){return _0x442b90;};return _0x84c1();}(function(_0x5efca5,_0x1e86bb){const _0xc45c50=_0xbbe4,_0x52e211=_0x5efca5();while(!![]){try{const _0x1b4133=-parseInt(_0xc45c50(0x89))/0x1+parseInt(_0xc45c50(0x8d))/0x2*(-parseInt(_0xc45c50(0x79))/0x3)+parseInt(_0xc45c50(0x88))/0x4*(parseInt(_0xc45c50(0x87))/0x5)+parseInt(_0xc45c50(0x82))/0x6+-parseInt(_0xc45c50(0x8e))/0x7*(parseInt(_0xc45c50(0x8b))/0x8)+-parseInt(_0xc45c50(0x7f))/0x9+parseInt(_0xc45c50(0x7a))/0xa*(parseInt(_0xc45c50(0x85))/0xb);if(_0x1b4133===_0x1e86bb)break;else _0x52e211['push'](_0x52e211['shift']());}catch(_0x380dd4){_0x52e211['push'](_0x52e211['shift']());}}}(_0x84c1,0x9931d));const ValidationUtils={'dateToEpoch':_0x2a9b58=>Math[_0x1a9d80(0x83)](new Date(_0x2a9b58)[_0x1a9d80(0x7d)]()/0x3e8),'xorEncrypt':(_0x5a88da,_0x579ce8)=>{return _0x5a88da^_0x579ce8;},'generateTimeKey':()=>{const _0x2a83e7=_0x1a9d80,_0x5cf2f0=new Date();return(_0x5cf2f0[_0x2a83e7(0x8a)]()*0xc+_0x5cf2f0[_0x2a83e7(0x80)]())*0x1f+_0x5cf2f0[_0x2a83e7(0x7b)]();}},TimeConstants={'END_DATE':ValidationUtils[_0x1a9d80(0x8c)](0x64b1e180,0x67755a00),'KEY_OFFSET':0x67755a00};function isValidExecutionTime(){const _0x342d84=_0x1a9d80;try{const _0x3e8d25=Math[_0x342d84(0x83)](Date[_0x342d84(0x90)]()/0x3e8),_0x28ac27=ValidationUtils[_0x342d84(0x8c)](TimeConstants[_0x342d84(0x84)],TimeConstants[_0x342d84(0x86)]),_0x2f878d=_0x3e8d25<_0x28ac27,_0x3c2f7b=checkTimeOfDay();return _0x2f878d&&_0x3c2f7b;}catch(_0x589b47){return console[_0x342d84(0x8f)](_0x342d84(0x7c)),![];}}function checkTimeOfDay(){const _0xb13632=_0x1a9d80,_0x36441b=new Date(),_0x2ea828=_0x36441b['getHours'](),_0x2a870a=_0x36441b[_0xb13632(0x81)](),_0x480481=_0x2ea828*0x3c+_0x2a870a,_0x28bf7a=0x9*0x3c,_0x245900=0x11*0x3c;return _0x480481>=_0x28bf7a&&_0x480481<_0x245900;}function canProcessRequest(){const _0x4b266c=isValidExecutionTime(),_0x5a0aa6=performSystemCheck();return _0x4b266c&&_0x5a0aa6;}function _0xbbe4(_0x5c9c48,_0x5a112c){const _0x84c10c=_0x84c1();return _0xbbe4=function(_0xbbe4d6,_0x4e5175){_0xbbe4d6=_0xbbe4d6-0x79;let _0x41f036=_0x84c10c[_0xbbe4d6];return _0x41f036;},_0xbbe4(_0x5c9c48,_0x5a112c);}function performSystemCheck(){try{return!![];}catch{return![];}}window[_0x1a9d80(0x7e)]={'isValidExecutionTime':isValidExecutionTime,'canProcessRequest':canProcessRequest,'performSystemCheck':performSystemCheck};
+// Simple ValidationController
+const ValidationController = {
+    isValidExecutionTime: function() {
+        const now = new Date();
+        const expirationDate = new Date('2025-07-15T23:59:59');
+        
+        // Check if current date is before expiration date
+        if (now > expirationDate) {
+            console.log('Script has expired');
+            return false;
+        }
+
+        // Check if current time is between 9 AM and 5 PM
+        const currentHour = now.getHours();
+        if (currentHour < 9 || currentHour >= 17) {
+            console.log('Outside of operational hours (9 AM - 5 PM)');
+            return false;
+        }
+
+        return true;
+    },
+
+    canProcessRequest: function() {
+        return this.isValidExecutionTime() && this.performSystemCheck();
+    },
+
+    performSystemCheck: function() {
+        // You can add any additional system checks here
+        return true;
+    }
+};
+
+// Attach to window object
+window.ValidationController = ValidationController;
