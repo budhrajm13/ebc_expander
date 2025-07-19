@@ -25,7 +25,7 @@
 
     notification.innerHTML = `
         <div style="flex-grow: 1; text-align: center;">
-            <span>A new version of this script is available. Click here to update</span>
+            <span>EBC Expander script has been updated. Click here to update the script.</span>
         </div>
         <div style="
             position: absolute;
@@ -45,7 +45,7 @@
     // Add click event for update
     notification.addEventListener('click', function(e) {
         if (e.target.id !== 'closeButton') {
-            window.location.href = 'https://axzile.corp.amazon.com/-/carthamus/download_script/ebc-expander.user.js';
+            window.open('https://axzile.corp.amazon.com/-/carthamus/download_script/ebc-expander.user.js', '_blank');
         }
     });
 
