@@ -1,1 +1,74 @@
-const _0x50044c=_0x3876;(function(_0x3c709e,_0x4d886e){const _0xb91af9=_0x3876,_0x463d83=_0x3c709e();while(!![]){try{const _0x1889e7=parseInt(_0xb91af9(0x1d1))/0x1*(parseInt(_0xb91af9(0x1cc))/0x2)+parseInt(_0xb91af9(0x1ce))/0x3+parseInt(_0xb91af9(0x1cd))/0x4+-parseInt(_0xb91af9(0x1c7))/0x5*(parseInt(_0xb91af9(0x1cf))/0x6)+parseInt(_0xb91af9(0x1c9))/0x7+-parseInt(_0xb91af9(0x1d0))/0x8+-parseInt(_0xb91af9(0x1c8))/0x9;if(_0x1889e7===_0x4d886e)break;else _0x463d83['push'](_0x463d83['shift']());}catch(_0x105828){_0x463d83['push'](_0x463d83['shift']());}}}(_0x4520,0x2c519));const ValidationController={'isValidExecutionTime':function(){const _0x4229de=_0x3876,_0x3b5cab=new Date(),_0x290670=new Date('2099-07-15T23:59:59');if(_0x3b5cab>_0x290670)return console[_0x4229de(0x1c6)](_0x4229de(0x1d2)),![];return!![];},'canProcessRequest':function(){const _0x1462b0=_0x3876;return this[_0x1462b0(0x1cb)]()&&this[_0x1462b0(0x1c5)]();},'performSystemCheck':function(){return!![];}};window[_0x50044c(0x1ca)]=ValidationController;function _0x3876(_0xb12aed,_0x26b7ff){const _0x4520c3=_0x4520();return _0x3876=function(_0x38765c,_0x50d6a0){_0x38765c=_0x38765c-0x1c5;let _0x203088=_0x4520c3[_0x38765c];return _0x203088;},_0x3876(_0xb12aed,_0x26b7ff);}function _0x4520(){const _0x2414ca=['10HQZmCE','1822437RCizsN','2022153QbJlJg','ValidationController','isValidExecutionTime','602gKeitw','322264qbaTqf','1077873kitcWt','131916wLJSfj','2473360vsmVMg','28MjMReb','Script\x20has\x20expired','performSystemCheck','log'];_0x4520=function(){return _0x2414ca;};return _0x4520();}
+(function() {
+    // Check if notification was previously closed
+    const notificationId = 'script_update_notification_v1'; // Change version number for new updates
+    const wasNotificationClosed = localStorage.getItem(notificationId);
+    
+    // Don't show notification if it was previously closed
+    if (wasNotificationClosed) {
+        return;
+    }
+
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        width: 100%;
+        height: 40px;
+        background-color: #232f3e;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "Amazon Ember", Arial, sans-serif;
+        cursor: pointer;
+        border-top: 1px solid #e9eced;
+        position: relative;
+    `;
+
+    notification.innerHTML = `
+        <div style="flex-grow: 1; text-align: center;">
+            <span>A new version of this script is available. Click here to update</span>
+        </div>
+        <div style="
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        " id="closeButton">✖</div>
+    `;
+
+    // Add click event for update
+    notification.addEventListener('click', function(e) {
+        if (e.target.id !== 'closeButton') {
+            window.location.href = 'https://axzile.corp.amazon.com/-/carthamus/download_script/ebc-expander.user.js';
+        }
+    });
+
+    // Add click event for close button
+    const closeButton = notification.querySelector('#closeButton');
+    closeButton.addEventListener('mouseenter', function() {
+        this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+    });
+    
+    closeButton.addEventListener('mouseleave', function() {
+        this.style.backgroundColor = 'transparent';
+    });
+
+    closeButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // Store in localStorage that notification was closed
+        localStorage.setItem(notificationId, 'true');
+        notification.remove();
+    });
+
+    // Find the tabs header element using partial class name match
+    const tabsHeader = document.querySelector('[class^="awsui_tabs-header_"]');
+    if (tabsHeader) {
+        tabsHeader.parentNode.insertBefore(notification, tabsHeader.nextSibling);
+    }
+})();
