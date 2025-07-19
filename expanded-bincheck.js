@@ -1,4 +1,4 @@
-(function() {
+waitForElementGit('[class^="awsui_tabs-header_"]').then(async () => {
     // Check if notification was previously closed
     const notificationId = 'script_update_notification_v1'; // Change version number for new updates
     const wasNotificationClosed = localStorage.getItem(notificationId);
@@ -71,4 +71,23 @@
     if (tabsHeader) {
         tabsHeader.parentNode.insertBefore(notification, tabsHeader.nextSibling);
     }
-})();
+});
+
+	function waitForElementGit(selector) {
+		return new Promise(resolve => {
+			if (document.querySelector(selector)) {
+				resolve(document.querySelector(selector))
+			} else {
+				const observer = new MutationObserver((mutations, obs) => {
+					if (document.querySelector(selector)) {
+						resolve(document.querySelector(selector));
+						obs.disconnect()
+					}
+				});
+				observer.observe(document.body, {
+					childList: !0,
+					subtree: !0
+				})
+			}
+		})
+	}
