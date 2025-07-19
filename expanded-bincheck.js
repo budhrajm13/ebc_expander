@@ -1,29 +1,9 @@
 (function() {
-    // Get current version from Tampermonkey script
-    const currentVersion = GM_info.script.version; // This gets the current script version
-    const minimumVersion = "1.2.0"; // Version threshold
-    
-    // Compare versions function
-    function compareVersions(current, minimum) {
-        const current_parts = current.split('.').map(Number);
-        const minimum_parts = minimum.split('.').map(Number);
-        
-        for (let i = 0; i < 3; i++) {
-            if (current_parts[i] > minimum_parts[i]) return false;
-            if (current_parts[i] < minimum_parts[i]) return true;
-        }
-        return false;
-    }
-
-    // Only proceed if current version is less than or equal to minimum version
-    if (!compareVersions(currentVersion, minimumVersion)) {
-        return;
-    }
-
     // Check if notification was previously closed
-    const notificationId = 'script_update_notification_v1';
+    const notificationId = 'script_update_notification_v1'; // Change version number for new updates
     const wasNotificationClosed = localStorage.getItem(notificationId);
     
+    // Don't show notification if it was previously closed
     if (wasNotificationClosed) {
         return;
     }
@@ -45,7 +25,7 @@
 
     notification.innerHTML = `
         <div style="flex-grow: 1; text-align: center;">
-            <span>EBC Expander script has been updated. Click here to update the script.</span>
+            <span>A new version of this script is available. Click here to update</span>
         </div>
         <div style="
             position: absolute;
@@ -81,6 +61,7 @@
 
     closeButton.addEventListener('click', function(e) {
         e.stopPropagation();
+        // Store in localStorage that notification was closed
         localStorage.setItem(notificationId, 'true');
         notification.remove();
     });
